@@ -5,6 +5,7 @@ class TextImprover:
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForCausalLM.from_pretrained(model_name)
 
+
     def improve_text(self, text):
         if not text:
             return "Texto vacío no puede ser mejorado."
@@ -27,9 +28,11 @@ class GptService:
 
 # Ejemplo de uso
 if __name__ == "__main__":
-    text_improver = TextImprover()
-    gpt_service = GptService(text_improver)
+    content_enrichment = ContentEnrichment()
 
-    sample_text = "Este es un texto de ejemplo de Wikipedia."
-    improved_text = gpt_service.improve_wikipedia_text(sample_text)
-    print(improved_text)
+    while True:
+        sample_text = input("Ingrese un texto para mejorar (o 'salir' para terminar): ")
+        if sample_text.lower() == 'salir':
+            break
+        improved_text = content_enrichment.improve_text(sample_text)
+        print("Texto mejorado:", improved_text)
