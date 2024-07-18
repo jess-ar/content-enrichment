@@ -1,3 +1,4 @@
+
 def user_query_input():
         try:
             user_input = input("Ingresa tu consulta")
@@ -29,3 +30,13 @@ def user_translate_input():
 print(user_query_input())
 print(user_gpt_input())
 print(user_translate_input())
+
+
+"""def get_user_input(prompt):
+    return input(prompt).strip()
+
+def get_user_confirmation(action):
+    response = input(f"¿Quieres {action}? (s/n): ").strip().lower()
+    return response == 's'"""
+
+
