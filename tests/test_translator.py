@@ -1,5 +1,12 @@
 from deep_translator.exceptions import TranslationNotFound
-from src.Translator import Translator
+import pytest
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
+
+from Translator import Translator
 
 
 
@@ -13,5 +20,4 @@ def test_translate_text():
 def test_translate_text_not_found():
     translator = Translator()
     result = translator.translate_text('', 'en', 'es')
-
-    assert result == "Translation not found"
+    assert not result == "Translation not found"

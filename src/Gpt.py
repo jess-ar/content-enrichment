@@ -26,13 +26,3 @@ class GptService:
     def improve_wikipedia_text(self, text):
         return self.text_improver.improve_text(text)
 
-# Ejemplo de uso
-"""if __name__ == "__main__":
-    content_enrichment = ContentEnrichment()
-
-    while True:
-        sample_text = input("Ingrese un texto para mejorar (o 'salir' para terminar): ")
-        if sample_text.lower() == 'salir':
-            break
-        improved_text = content_enrichment.improve_text(sample_text)
-        print("Texto mejorado:", improved_text)"""

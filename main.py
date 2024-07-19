@@ -1,26 +1,14 @@
-# eso es el incio no hace falta importar nada mas
-from src.Content_enrichment import Content_enrichment
+
+
+from src.Content_enrichment import ContentEnrichment
+
 def main():
-    app = Content_enrichment()
-    app.run()
+    try:
+        contentenrichment = ContentEnrichment()
+        contentenrichment.run()
+    except Exception as e:
+        print(f"Error al ejecutar el programa: {e}")
 
-main()
-
-
-"""from .src.Gpt import GptService, TextImprover
-def main():
-    ti = TextImprover
-    gpt = GptService(textimprover=ti)
-
-    while True:
-        i = input('Write some text or quit to exit')
-
-        if i == 'quit':
-            return
-
-        result = gpt.textimprover(i)
-        print(result)
-
-if name == '__main':
-    main()"""
+if __name__ == "__main__":
+    main()
 
