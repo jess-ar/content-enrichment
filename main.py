@@ -1,5 +1,3 @@
-
-
 from src.Content_enrichment import ContentEnrichment
 
 def main():

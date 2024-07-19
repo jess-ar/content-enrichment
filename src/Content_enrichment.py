@@ -28,7 +28,7 @@ class ContentEnrichment:
                     except Exception as e:
                         print(f"Error al mejorar el texto: {e}")
 
-                if get_user_confirmation("traducir el texto mejorado"):
+                if get_user_confirmation("traducir el texto "):
                     src_lang = get_user_input("Ingresa el idioma de origen (ej. en): ")
                     tgt_lang = get_user_input("Ingresa el idioma de destino (ej. es): ")
                     try:
@@ -41,5 +41,5 @@ class ContentEnrichment:
                 print("No se encontró contenido para la búsqueda.")
 
             if not get_user_confirmation("realizar otra búsqueda"):
-                print("Gracias por usar nuestra aplicacion. ¡Hasta proximo!")
+                print("Gracias por usar nuestra aplicacion. ¡Hasta la próxima!")
                 break

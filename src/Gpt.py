@@ -12,7 +12,7 @@ class TextImprover:
 
         try:
             inputs = self.tokenizer(text, return_tensors="pt")
-            outputs = self.model.generate(inputs.input_ids, max_length=512, num_return_sequences=1)
+            outputs = self.model.generate(inputs.input_ids, max_length=800, num_return_sequences=1)
             improved_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
             return improved_text
         except Exception as e:
