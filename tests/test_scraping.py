@@ -26,6 +26,7 @@ def test_scrape(requests_mock):
     </html>
     """
 
+
     requests_mock.get("https://en.wikipedia.org/wiki/Test", text=html_content)
     scraper = Scraping("Test")
     title, content = scraper.scrape()
