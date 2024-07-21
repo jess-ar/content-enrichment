@@ -1,8 +1,11 @@
 from fpdf import FPDF
-from Scraping import Scraping
+from src.Scraping import Scraping
 
 class Generator (FPDF):
-    pass
+    def __init__(self):
+        super().__init__()
+        self.add_font("Arial", fname="C:/Windows/Fonts/Arial.ttf", uni=True)
+        self.set_font("Arial", size=12)
     def texts (self,content):
         self.set_xy(10.0,80.0)
         self.set_text_color(0.0, 0.0, 0.0)
@@ -10,8 +13,8 @@ class Generator (FPDF):
         self.multi_cell(0, 10, content)
 
     def titles(self,title):
-        self.set_xy(0.0, 0.0)
-        self.set_font("Arial", "B", 16)
+        self.set_xy(10.0, 20.0)
+        self.set_font("Arial", "B", 18)
         self.set_text_color(0.0, 0.0, 0.0)
         self.cell(w=210.0, h=40.0, align="c", txt=title, border=0)
 
@@ -29,10 +32,7 @@ if __name__ == "__main__":
     title, content = scraper.scrape()
 
     pdf = Generator()
-    file_name = "output.pdf"
-    change_name = input("¿Quieres cambiar el nombre del archivo? (s/n): ").strip().lower()
-    if change_name == 's':
-        file_name = input("Introduce el nuevo nombre del archivo (con extensión .pdf): ").strip()
+    file_name = "document.pdf"
 
     pdf.generate_pdf(title, content, file_name)
 
