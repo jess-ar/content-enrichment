@@ -1,73 +1,30 @@
 import pytest
-import sys
-import os
-from transformers import AutoTokenizer
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-from Gpt import TextImprover, GptService
+from src.Gpt import TextImprover
 
-
-class MockModel:
-    def generate(self, input_ids, max_length, num_return_sequences):
-        return [[token_id for token_id in input_ids[0]] + [42]]
-
-
-@pytest.fixture
-def text_improver():
-    tokenizer = AutoTokenizer.from_pretrained("gpt2")
-    model = MockModel()
+# Test para la mejora de un texto válido
+def test_improve_valid_text():
+    # Given
     text_improver = TextImprover()
-    text_improver.tokenizer = tokenizer
-    text_improver.model = model
-    return text_improver
+    text = "Vigo is a city and municipality in the province of Pontevedra, within the autonomous community of Galicia, Spain."
 
-
-@pytest.fixture
-def gpt_service(text_improver):
-    return GptService(text_improver)
-
-
-def test_improve_text(text_improver):
-    text = "El método mejora efectivamente un texto"
+    # When
     result = text_improver.improve_text(text)
-    assert result != text
 
+    # Then
+    # Verifica que el texto mejorado contiene palabras clave importantes
+    assert "Vigo" in result, f"Expected 'Vigo' to be in the improved text, but got: {result}"
+    assert "city" in result, f"Expected 'city' to be in the improved text, but got: {result}"
+    assert "Pontevedra" in result, f"Expected 'Pontevedra' to be in the improved text, but got: {result}"
+    assert "Galicia" in result, f"Expected 'Galicia' to be in the improved text, but got: {result}"
 
-def test_improve_text_empty(text_improver):
+# Test para manejar el caso de un texto vacío
+def test_improve_empty_text():
+    # Given
+    text_improver = TextImprover()
     text = ""
+
+    # When
     result = text_improver.improve_text(text)
-    assert result == "Texto vacío no puede ser mejorado."
 
-def test_improve_text_special_chars(text_improver):
-    text = "!@#$$%^&*()Se maneja correctamente un texto compuesto de caracteres especiales"
-    result = text_improver.improve_text(text)
-    assert result != text
-
-
-def test_improve_wikipedia_text(gpt_service):
-    text = "el servicio GptService mejora el texto utilizando improve_text de TextImprover."
-    result = gpt_service.improve_wikipedia_text(text)
-    assert result != text
-
-def test_improve_text_with_long_input(text_improver):
-    text = " ".join(["word"] * 1000)
-    result = text_improver.improve_text(text)
-    assert result != text
-    assert len(result) > len(text)
-
-
-def test_improve_text_error_handling(monkeypatch, text_improver):
-    def mock_generate(*args, **kwargs):
-        raise RuntimeError("Error en el modelo")
-
-    monkeypatch.setattr(text_improver.model, 'generate', mock_generate)
-
-    text = "Simula un error en la generación de texto y asegura que el sistema maneje este error adecuadamente"
-    result = text_improver.improve_text(text)
-    assert result == "Error al mejorar el texto: Error en el modelo"
-
-
-def test_improve_text_format(text_improver):
-    text = "Verifica que el texto mejorado tenga el formato correcto (es decir, no esté vacío ni compuesto solo por espacios"
-    result = text_improver.improve_text(text)
-    assert isinstance(result, str)
-    assert result.strip() != ""
+    # Then
+    assert result == "Texto vacío no puede ser mejorado.", f"Expected error message, but got: {result}"

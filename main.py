@@ -1,4 +1,8 @@
+import logging
 from src.Content_enrichment import ContentEnrichment
+
+#logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 def main():
     try:

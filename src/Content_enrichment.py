@@ -1,12 +1,11 @@
 from src.Scraping import Scraping
-from src.Gpt import TextImprover, GptService
+from src.Gpt import TextImprover
 from src.Translator import Translator
 from src.utils import get_user_input, get_user_confirmation
 
 class ContentEnrichment:
     def __init__(self):
         self.text_improver = TextImprover()
-        self.gpt_service = GptService(self.text_improver)
         self.translator = Translator()
 
     def run(self):
@@ -21,9 +20,9 @@ class ContentEnrichment:
 
                 improved_content = content
 
-                if get_user_confirmation("mejorar el texto"):
+                if get_user_confirmation("¿Deseas mejorar el texto?"):
                     try:
-                        improved_content = self.gpt_service.improve_wikipedia_text(content)
+                        improved_content = self.text_improver.improve_text(content)
                         print(f"Texto Mejorado:\n{improved_content}")
                     except Exception as e:
                         print(f"Error al mejorar el texto: {e}")
