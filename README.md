@@ -41,7 +41,7 @@ En primer lugar, creamos un proyecto en jira para organizar las tareas a realiza
 - [Seda Gevorgyan] ([https://github.com/Seda07](https://github.com/Seda07)) - SM
 - [Belén Sánchez] (https://github.com/Belensanchez1989) - PO
 - [Jessica Arroyo] (https://github.com/jess-ar) -Developer
-- [Evelyn Quevedo] () - Developer 
+- [Evelyn Quevedo] (https://github.com/evymari) - Developer 
 - [Ana Sánchez] (https://github.com/tursdlc) - Developer
 
 
